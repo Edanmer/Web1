@@ -1,138 +1,88 @@
 import React, { Component } from 'react';
-import './Home.css';
+import './main.css';
+import axios from 'axios';
+import lodash from 'lodash';
+import Separation from '../../components/separation.js';
+import DataTable from '../../components/dataTable.js';
+import LoginHeader from '../../components/loginHeader.js';
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
 
-  renderTableRows = () => {
-    return (
-      <tr>
-        <td>Punta Cana</td>
-        <td>QA Engineer</td>
-        <td>Confidencial</td>
-      </tr>
-    )
+    this.state = {
+      jobData: [],
+      categoryData: []
+    }
+  }
+
+  componentDidMount() {
+    axios.get('http://api-empleos.net:8080/jobs')
+      .then((objResponse) => {
+        this.setState({ jobData: objResponse.data.data })
+        console.log(JSON.stringify(objResponse, null, 2));
+      })
+      .catch((objError) => {
+        console.log("ERROR" + JSON.stringify(objError, null, 2));
+      })
+
+    axios.get('http://api-empleos.net:8080/categories')
+      .then((objResponse) => {
+        this.setState({ categoryData: objResponse.data })
+        console.log(JSON.stringify(objResponse, null, 2));
+      })
+      .catch((objError) => {
+        console.log("ERROR" + JSON.stringify(objError, null, 2));
+      })
+  }
+
+  renderCategorySeparation = () => {
+    const categories = this.state.categoryData;
+    const jobs = this.state.jobData;
+
+    let empty = [];
+    let html = categories.map((item, index) => {
+      let filteredjobs = lodash.filter(jobs, { "category": item.name });
+      if( lodash.isEmpty(filteredjobs) ) {
+        empty.push(index);
+      }
+      return (
+        <div key={item._id}>
+          <Separation title={item.name} />
+          <DataTable dataArray={filteredjobs} />
+        </div>
+      )
+    });
+    if( !lodash.isEmpty(empty) ){
+      empty.forEach(element => {
+        html.splice(element, 1);
+      });
+    }
+
+    return html;
   }
 
   render() {
     return (
-      <div className="">
-        <div className="backgroundcolor">
-          <div className="ui container ui secondary menu ">
-            <div className="right menu">
-              <a className="ui item">
-                Logout
-            </a>
-            </div>
+      <div className="container">
+
+        <LoginHeader />
+
+        <section id="header">
+          <div className="searchbar">
+            <nav className="navbar">
+              <form className="form-inline">
+                <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+              <a className="btn btn-success text-white" href="/postAJob">Post a Job</a>
+            </nav>
           </div>
-        </div>
-        <div className="ui container" style={{ height: 40, marginTop: 40 }}>
-          <div style={{ float: "left" }}>
-            <div className="ui icon input">
-              <input type="text" placeholder="Search..." />
-              <i className="circular search link icon"></i>
-            </div>
-            <button className="ui primary button">
-              Search
-          </button>
-          </div>
+        </section>
 
-          <div style={{ float: "right" }}>
-            <button className="ui green button">
-              <i className="bullhorn icon"></i>
-              Post a Job
-          </button>
-          </div>
-        </div>
+        {this.renderCategorySeparation()}
 
-        <h4 className="ui container ui horizontal divider header">
-          <i className="tint icon"></i>
-          Design
-        </h4>
-
-        <div className="ui container">
-          <table className="ui celled table">
-            <thead>
-              <tr>
-                <th>Location</th>
-                <th>Position</th>
-                <th>Company</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Santo Domingo</td>
-                <td>Web Designer</td>
-                <td>MercaSID</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr><th colSpan="3">
-                <div className="ui right floated pagination menu">
-                  <a className="icon item">
-                    <i className="left chevron icon"></i>
-                  </a>
-                  <a className="item">1</a>
-                  <a className="item">2</a>
-                  <a className="item">3</a>
-                  <a className="item">4</a>
-                  <a className="icon item">
-                    <i className="right chevron icon"></i>
-                  </a>
-                </div>
-              </th>
-              </tr></tfoot>
-          </table>
-        </div>
-
-        <h4 className="ui container ui horizontal divider header">
-          <i className="node js icon"></i>
-          Programming
-        </h4>
-
-        <div className="ui container">
-          <table className="ui celled table">
-            <thead>
-              <tr><th>Location</th>
-                <th>Position</th>
-                <th>Company</th>
-              </tr></thead>
-            <tbody>
-              <tr>
-                <td>Santo Domingo</td>
-                <td>Web Developer</td>
-                <td>Claro RD</td>
-              </tr>
-              <tr>
-                <td>Santiago</td>
-                <td>Tester</td>
-                <td>Intellisys Inc.</td>
-              </tr>
-              <tr>
-                <td>Android Developer</td>
-                <td>Web Developer</td>
-                <td>Casa de Campo</td>
-              </tr>
-              {this.renderTableRows()}              
-            </tbody>
-            <tfoot>
-              <tr><th colSpan="3">
-                <div className="ui right floated pagination menu">
-                  <a className="icon item">
-                    <i className="left chevron icon"></i>
-                  </a>
-                  <a className="item">1</a>
-                  <a className="item">2</a>
-                  <a className="item">3</a>
-                  <a className="item">4</a>
-                  <a className="icon item">
-                    <i className="right chevron icon"></i>
-                  </a>
-                </div>
-              </th>
-              </tr></tfoot>
-          </table>
-        </div>
-
+        <section id="footer"></section>
       </div>
     );
   }

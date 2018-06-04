@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "history": "^4.7.2",
+    "lodash": "^4.17.10",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-navigation": "^2.0.4",
     "react-router": "^4.2.0",
     "react-scripts": "1.1.4",
     "semantic-ui-css": "^2.3.1",
