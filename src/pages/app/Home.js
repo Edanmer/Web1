@@ -48,7 +48,7 @@ class Home extends Component {
       }
       return (
         <div key={item._id}>
-          <Separation title={item.name} />
+          <Separation title={item.name} clickable/>
           <DataTable dataArray={filteredjobs} />
         </div>
       )
