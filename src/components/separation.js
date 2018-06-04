@@ -7,7 +7,7 @@ class Separation extends PureComponent {
     const { title } = this.props; 
     return(
       <section className="separation">
-        <hr className="hr-text" data-content={title} />
+        <a href={`/filteredJobs/${title}`}><hr className="hr-text" data-content={title} /></a>
       </section>
     )
   }

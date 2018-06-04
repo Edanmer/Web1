@@ -21,7 +21,7 @@ render((
     <Switch>
       <Route exact path={"/"} component={Home} />
       <Route exact path={"/postAJob"} component={postAJob} /> 
-      <Route exact path={"/filteredJobs"} component={filteredJobs} /> 
+      <Route exact path={"/filteredJobs/:id"} component={filteredJobs} />
       <Route exact path={"/jobDetail/:id"} component={jobDetail} /> 
       <Route exact path={"/login"} component={login} /> 
     </Switch>
