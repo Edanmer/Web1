@@ -1,20 +1,22 @@
 import React, { PureComponent } from 'react';
 import '../pages/app/main.css';
 
-class DataTable extends PureComponent {
+class tableTripulacion extends PureComponent {
 
   handleTableClick = (evt, item) => {
     evt.preventDefault();
-    window.location=`/jobDetail/${item._id}`;
+    // window.location=`/jobDetail/${item._id}`;
   }
 
   renderTableRows = (data) => {
     const rows = data.map((item) => {
       return (
-        <tr key={item._id} onClick={(evt) => this.handleTableClick(evt, item)}>
-          <td>{item.address}</td>
-          <td>{item.position}</td>
-          <td>{item.company}</td>
+        <tr key={item.id} onClick={(evt) => this.handleTableClick(evt, item)}>
+          <td>{item.nombre}</td>
+          <td>{item.apellido}</td>
+          <td>{item.cedula}</td>
+          <td>{item.ciudad}</td>
+          <td>{item.calle}</td>
         </tr>
       )
     });
@@ -29,9 +31,11 @@ class DataTable extends PureComponent {
         <table className="table table-hover table-striped table-bordered">
           <thead className="thead-dark">
             <tr>
-              <th>Location</th>
-              <th>Position</th>
-              <th>Company</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Cedula</th>
+              <th>Ciudad</th>
+              <th>Calle</th>
             </tr>
           </thead>
 
@@ -46,4 +50,4 @@ class DataTable extends PureComponent {
   }
 }
 
-export default DataTable;
+export default tableTripulacion;

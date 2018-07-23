@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './main.css';
 import LoginHeader from '../../components/loginHeader.js';
 import Separation from '../../components/separation.js';
-import DataTable from '../../components/dataTable.js';
+// import DataTable from '../../components/dataTable.js';
 import axios from 'axios';
 
 class filteredJobs extends Component {
@@ -81,7 +81,7 @@ class filteredJobs extends Component {
         </section>
 
         <Separation title={this.state.title} />
-        <DataTable dataArray={this.state.jobData} />
+        {/* <DataTable dataArray={this.state.jobData} /> */}
 
         {this.renderStuff()}
 

@@ -9467,6 +9467,9 @@ section#login .forgot-password:focus{
     color: rgb(12, 97, 33);
 }
 
+.navbar {
+  margin-bottom: 20px;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
