@@ -13,6 +13,7 @@ class LoginHeader extends PureComponent {
 
   componentDidMount() {
     let data = localStorage.getItem("login");
+    console.log(JSON.stringify(data,null,2));
     if (data === null) {
       this.setState({ isLoggedIn: false });
     }
@@ -24,7 +25,7 @@ class LoginHeader extends PureComponent {
   renderText = () => {
     if (this.state.isLoggedIn) {
       return (
-        <h3>Welcome, {this.state.userData[0].firstname} </h3>
+        <h3>You are logged in </h3>
       )
     }
     else {

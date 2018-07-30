@@ -13,8 +13,9 @@ import tripulacion from './pages/app/tripulacion.js';
 import createClientes from './pages/app/createClientes.js';
 import createRutas from './pages/app/createRutas.js';
 import createTripulacion from './pages/app/createTripulacion.js';
-import filteredJobs from './pages/app/filteredJobs.js';
-import jobDetail from './pages/app/jobDetail.js';
+import clientesDetail from './pages/app/clientesDetail.js';
+import rutasDetail from './pages/app/rutasDetail.js';
+import tripulacionDetail from './pages/app/tripulacionDetail.js';
 import login from './pages/app/login.js';
 
 
@@ -29,8 +30,9 @@ render((
       <Route exact path={"/createClientes"} component={createClientes} /> 
       <Route exact path={"/createRutas"} component={createRutas} /> 
       <Route exact path={"/createTripulacion"} component={createTripulacion} /> 
-      <Route exact path={"/filteredJobs/:id"} component={filteredJobs} />
-      <Route exact path={"/jobDetail/:id"} component={jobDetail} /> 
+      <Route exact path={"/clientesDetail/:id"} component={clientesDetail} /> 
+      <Route exact path={"/rutasDetail/:id"} component={rutasDetail} /> 
+      <Route exact path={"/tripulacionDetail/:id"} component={tripulacionDetail} /> 
       <Route exact path={"/login"} component={login} /> 
     </Switch>
   </Router>

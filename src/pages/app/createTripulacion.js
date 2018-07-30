@@ -8,48 +8,29 @@ class createTripulacion extends Component {
     super(props);
 
     this.state = {
-      nombre: "",
-      apellido: "",
-      cedula: "",
-      ciudad: "",
-      calle: "",
+      nombrechofer: "",
+      nombrestaff1: "",
+      nombrestaff2: "",
+      ciudad: ""
     }
-  }
-
-  componentDidMount() {
-    // axios.get('http://api-empleos.net:8080/categories')
-    //   .then((objResponse) => {
-    //     this.setState({ categoryData: objResponse.data });
-    //     console.log("SUCCESS" + JSON.stringify(objResponse.data, null, 2));
-    //   })
-    //   .catch((objError) => {
-    //     console.log("ERROR" + JSON.stringify(objError, null, 2));
-    //   })
   }
 
   handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log(JSON.stringify(this.state, null, 2));
-    // axios.post('http://api-empleos.net:8080/jobs',
-    //   {
-    //     category: this.state.category,
-    //     type: this.state.type,
-    //     company: this.state.company,
-    //     logo: this.state.logo.name,
-    //     url: this.state.url,
-    //     position: this.state.position,
-    //     address: this.state.location,
-    //     description: this.state.description,
-    //     email: "mail@mail.com",
-    //     howToApply: "wakanda forever"
-    //   })
-    //   .then((objResponse) => {
-    //     console.log("SUCCESS" + JSON.stringify(objResponse, null, 2));
-    //     window.location = "/";
-    //   })
-    //   .catch((objError) => {
-    //     console.log("ERROR" + JSON.stringify(objError, null, 2));
-    //   })
+    axios.post('https://gittev1u10.execute-api.us-east-2.amazonaws.com/dev/tripulacion',
+      {
+        nombrechofer: this.state.nombrechofer,
+        nombrestaff1: this.state.nombrestaff1,
+        nombrestaff2: this.state.nombrestaff2,
+        ciudad: this.state.ciudad,
+      })
+      .then((objResponse) => {
+        console.log("SUCCESS" + JSON.stringify(objResponse, null, 2));
+        window.location = "/tripulacion";
+      })
+      .catch((objError) => {
+        console.log("ERROR" + JSON.stringify(objError, null, 2));
+      })
   }
 
   render() {
@@ -68,34 +49,28 @@ class createTripulacion extends Component {
           <h1>Creando Tripulacion</h1>
           <form>
             <div className="form-group row formSize">
-              <label className="col-4" htmlFor="inputCompany">Nombre</label>
-              <input className="col-8 form-control" type="text" id="inputCompany"
-                value={this.state.nombre}
-                onChange={(evt) => { this.setState({ nombre: evt.target.value }) }} />
-            </div>
-            <div className="form-group row formSize">
-              <label className="col-4" htmlFor="inputCompany">Apellido</label>
-              <input className="col-8 form-control" type="text" id="inputCompany"
-                value={this.state.apellido}
-                onChange={(evt) => { this.setState({ apellido: evt.target.value }) }} />
-            </div>
-            <div className="form-group row formSize">
-              <label className="col-4" htmlFor="inputCompany">Cedula</label>
-              <input className="col-8 form-control" type="number" id="inputCompany"
-                value={this.state.cedula}
-                onChange={(evt) => { this.setState({ cedula: evt.target.value }) }} />
-            </div>
-            <div className="form-group row formSize">
               <label className="col-4" htmlFor="inputCompany">Ciudad</label>
               <input className="col-8 form-control" type="text" id="inputCompany"
                 value={this.state.ciudad}
                 onChange={(evt) => { this.setState({ ciudad: evt.target.value }) }} />
             </div>
             <div className="form-group row formSize">
-              <label className="col-4" htmlFor="inputCompany">Calle</label>
+              <label className="col-4" htmlFor="inputCompany">Chofer</label>
               <input className="col-8 form-control" type="text" id="inputCompany"
-                value={this.state.calle}
-                onChange={(evt) => { this.setState({ calle: evt.target.value }) }} />
+                value={this.state.nombrechofer}
+                onChange={(evt) => { this.setState({ nombrechofer: evt.target.value }) }} />
+            </div>
+            <div className="form-group row formSize">
+              <label className="col-4" htmlFor="inputCompany">Ayudante #1</label>
+              <input className="col-8 form-control" type="text" id="inputCompany"
+                value={this.state.nombrestaff1}
+                onChange={(evt) => { this.setState({ nombrestaff1: evt.target.value }) }} />
+            </div>
+            <div className="form-group row formSize">
+              <label className="col-4" htmlFor="inputCompany">Ayudante #2</label>
+              <input className="col-8 form-control" type="text" id="inputCompany"
+                value={this.state.nombrestaff2}
+                onChange={(evt) => { this.setState({ nombrestaff2: evt.target.value }) }} />
             </div>
             <div className="form-group row formSize">
               <button className="offset-4 col-3 btn btn-success" onClick={(evt) => this.handleSubmit(evt)}>Submit</button>

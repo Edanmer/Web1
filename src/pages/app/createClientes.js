@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './main.css';
 import axios from 'axios';
+import lodash from 'lodash';
 import LoginHeader from '../../components/loginHeader.js';
 
 class createClientes extends Component {
@@ -15,13 +16,14 @@ class createClientes extends Component {
       sector: "",
       calle: "",
       latitud: "",
-      longitud: ""
+      longitud: "",
+      dias: []
     }
   }
 
   handleSubmit = (evt) => {
     evt.preventDefault();
-    axios.post('https://gittev1u10.execute-api.us-east-2.amazonaws.com/dev/updatecliente',
+    axios.post('https://gittev1u10.execute-api.us-east-2.amazonaws.com/dev/clientes',
       {
         nombre: this.state.nombre,
         numero: this.state.numero,
@@ -30,7 +32,8 @@ class createClientes extends Component {
         sector: this.state.sector,
         calle: this.state.calle,
         latitud: this.state.latitud,
-        longitud: this.state.longitud
+        longitud: this.state.longitud,
+        drecogida: this.state.dias
       })
       .then((objResponse) => {
         console.log("SUCCESS" + JSON.stringify(objResponse, null, 2));
@@ -39,6 +42,21 @@ class createClientes extends Component {
       .catch((objError) => {
         console.log("ERROR" + JSON.stringify(objError, null, 2));
       })
+  }
+
+  handleCheckInput = (event) => {
+
+    let days = this.state.dias;
+
+    if (event.target.checked) {
+      days.push(event.target.value);
+    }
+    else {
+      let index = lodash.indexOf(days, event.target.value);
+      lodash.pullAt(days, index);
+    }
+
+    this.setState({ dias: days });
   }
 
   render() {
@@ -104,7 +122,42 @@ class createClientes extends Component {
                 value={this.state.longitud}
                 onChange={(evt) => { this.setState({ longitud: evt.target.value }) }} />
             </div>
-            <div className="form-group row formSize">
+            <div className="form-check-inline">
+              <input className="form-check-input" type="checkbox" value="Lunes" id="checkLunes"
+                onChange={this.handleCheckInput} />
+              <label className="form-check-label" htmlFor="checkLunes">Lunes</label>
+            </div>
+            <div className="form-check-inline">
+              <input className="form-check-input" type="checkbox" value="Martes" id="checkMartes"
+                onChange={this.handleCheckInput} />
+              <label className="form-check-label" htmlFor="checkMartes">Martes</label>
+            </div>
+            <div className="form-check-inline">
+              <input className="form-check-input" type="checkbox" value="Miercoles" id="checkMiercoles" 
+                onChange={this.handleCheckInput}/>
+              <label className="form-check-label" htmlFor="checkMiercoles">Miercoles</label>
+            </div>
+            <div className="form-check-inline">
+              <input className="form-check-input" type="checkbox" value="Jueves" id="checkJueves" 
+                onChange={this.handleCheckInput}/>
+              <label className="form-check-label" htmlFor="checkJueves">Jueves</label>
+            </div>
+            <div className="form-check-inline">
+              <input className="form-check-input" type="checkbox" value="Viernes" id="checkViernes" 
+                onChange={this.handleCheckInput}/>
+              <label className="form-check-label" htmlFor="checkViernes">Viernes</label>
+            </div>
+            <div className="form-check-inline">
+              <input className="form-check-input" type="checkbox" value="Sabado" id="checkSabado" 
+                onChange={this.handleCheckInput}/>
+              <label className="form-check-label" htmlFor="checkSabado">Sabado</label>
+            </div>
+            <div className="form-check-inline">
+              <input className="form-check-input" type="checkbox" value="Domingo" id="checkDomingo" 
+                onChange={this.handleCheckInput}/>
+              <label className="form-check-label" htmlFor="checkDomingo">Domingo</label>
+            </div>
+            <div className="form-group row formSize mt-4">
               <button className="offset-4 col-3 btn btn-success" onClick={(evt) => this.handleSubmit(evt)}>Submit</button>
             </div>
           </form>

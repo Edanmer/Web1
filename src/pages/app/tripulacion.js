@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './main.css';
 import axios from 'axios';
-import lodash from 'lodash';
 import Separation from '../../components/separation.js';
 import TableTripulacion from '../../components/tableTripulacion.js';
 import LoginHeader from '../../components/loginHeader.js';

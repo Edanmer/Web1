@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './main.css';
 import axios from 'axios';
-import lodash from 'lodash';
 import Separation from '../../components/separation.js';
 import TableClientes from '../../components/tableClientes.js';
 import LoginHeader from '../../components/loginHeader.js';
@@ -16,7 +15,7 @@ class clientes extends Component {
   }
 
   componentDidMount() {
-    axios.get('https://gittev1u10.execute-api.us-east-2.amazonaws.com/dev/updatecliente')
+    axios.get('https://gittev1u10.execute-api.us-east-2.amazonaws.com/dev/clientes')
       .then((objResponse) => {
         this.setState({ clientData: objResponse.data })
         console.log(JSON.stringify(objResponse, null, 2));

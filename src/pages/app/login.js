@@ -15,14 +15,14 @@ class login extends Component {
 
   handleLogin = (evt) => {
     evt.preventDefault();
-    axios.post('http://api-empleos.net:8080/users/login', {
+    axios.post('https://gittev1u10.execute-api.us-east-2.amazonaws.com/dev/usuarios', {
       email: this.state.email,
       password: this.state.password
     })
       .then((objResponse) => {
         console.log(JSON.stringify(objResponse, null, 2));
         localStorage.setItem("login", JSON.stringify(objResponse.data));
-        window.location = "/";
+        //window.location = "/clientes";
       })
       .catch((objError) => {
         console.log("ERROR" + JSON.stringify(objError, null, 2));
